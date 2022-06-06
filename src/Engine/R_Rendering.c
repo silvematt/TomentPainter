@@ -50,10 +50,29 @@ void R_UpdateColorPicker(void)
     {
         pixels[(x+startingPixelXOffset) + (y + startingPixelYOffset) * width] = SDL_MapRGB(window_surface->format, y * 4, y * 4, y * 4);
     }
+
+    R_DrawCurrentColor();
+}
+
+void R_DrawCurrentColor(void)
+{
+    // Draw current color
+    int startingPixelXOffset = SCREEN_WIDTH + 7 + 46;
+    int startingPixelYOffset = 102;
+
+    for(int x = 0; x < 48; x++)
+        for(int y = 0; y < 48; y++)
+            pixels[(x+startingPixelXOffset) + (y + startingPixelYOffset) * width] = currentMainColor;
 }
 
 void R_DrawFixed(int x1, int y1, int x2, int y2)
 {
+    // Draw a simple line if bushSize is 1
+        if(bushSize <= 1)
+            pixels[x1 + y1 * width] = currentMainColor;
+        else // Otherwise keep drawing circles
+            R_DrawCircle(x1, y1, bushSize);
+            
     while(x1 != x2 || y1 != y2)
     {
         if(x1 != x2)

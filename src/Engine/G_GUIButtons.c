@@ -6,12 +6,8 @@
 
 int G_BrightnessButtonOnClick(struct button_s* btn)
 {
-    printf("DONE LUL %s", btn->name);
-
     //Transform mouse relative to box
     int relativeY = my-btn->box.y;
-    printf("\n\n mouse relative y is: %d", relativeY);
-
     paletteBrightness = relativeY * 4;
 
     R_UpdateColorPicker();
@@ -21,5 +17,6 @@ int G_BrightnessButtonOnClick(struct button_s* btn)
 int G_ColorPickerOnClick(struct button_s* btn)
 {
     currentMainColor = pixels[mx + my * width];
+    R_DrawCurrentColor();
     return 0;
 }

@@ -24,8 +24,9 @@ void A_InitTomentPainter(void)
 
 static void A_InitPalette(void)
 {
-    paletteBrightness = 128;
-    bushSize = 5;
+    currentMainColor = SDL_MapRGBA(window_surface->format, 255, 255, 255, 255);
+    paletteBrightness = 256;
+    bushSize = 3;
 
     paletteButtons[0].name = "BrightnessSelector";
     paletteButtons[0].box.x = 775;
@@ -44,8 +45,6 @@ static void A_InitPalette(void)
 
 void A_GameLoop(void)
 {
-    //printf("%d\n", my);
-
     // In canvas
     if(mx <= SCREEN_WIDTH) 
     {

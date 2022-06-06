@@ -42,6 +42,56 @@ void I_HandleInput(void)
                     case SDLK_c:
                     R_ClearCanvas();
                     break;
+
+                    case SDLK_1:
+                        bushSize = 1;
+                        printf("Bush Size: 1\n");
+                    break;
+
+                    case SDLK_2:
+                        bushSize = 2;
+                        printf("Bush Size: 2\n");
+                    break;
+
+                    case SDLK_3:
+                        bushSize = 3;
+                        printf("Bush Size: 3\n");
+                    break;
+
+                    case SDLK_4:
+                        bushSize = 4;
+                        printf("Bush Size: 4\n");
+                    break;
+
+                    case SDLK_5:
+                        bushSize = 5;
+                        printf("Bush Size: 5\n");
+                    break;
+
+                    case SDLK_6:
+                        bushSize = 6;
+                        printf("Bush Size: 6\n");
+                    break;
+
+                    case SDLK_7:
+                        bushSize = 7;
+                        printf("Bush Size: 7\n");
+                    break;
+
+                    case SDLK_8:
+                        bushSize = 8;
+                        printf("Bush Size: 8\n");
+                    break;
+
+                    case SDLK_9:
+                        bushSize = 9;
+                        printf("Bush Size: 9\n");
+                    break;
+
+                    case SDLK_0:
+                        bushSize = 10;
+                        printf("Bush Size: 10\n");
+                    break;
                 }
             break;
 
@@ -83,8 +133,6 @@ void I_HandleGUI(SDL_Event event)
                 //Get the mouse offsets
                 x = event.button.x;
                 y = event.button.y;
-                printf("hardskool %d | %d \n", paletteButtons[i].box.x, paletteButtons[i].box.y);
-                printf("hardskool %d | %d \n", paletteButtons[i].box.w, paletteButtons[i].box.h);
 
                 //If the mouse is over the button
                 if( ( x > paletteButtons[i].box.x ) && ( x < paletteButtons[i].box.x + paletteButtons[i].box.w ) && 

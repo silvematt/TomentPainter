@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "datatypes.h": "c",
+        "r_rendering.h": "c",
+        "g_guibuttons.h": "c"
+    }
+}

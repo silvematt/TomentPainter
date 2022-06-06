@@ -25,7 +25,7 @@ void A_InitTomentPainter(void)
 static void A_InitPalette(void)
 {
     paletteBrightness = 128;
-    bushSize = 2;
+    bushSize = 5;
 
     paletteButtons[0].name = "BrightnessSelector";
     paletteButtons[0].box.x = 775;
@@ -51,8 +51,7 @@ void A_GameLoop(void)
     {
         if(drawing || altdrawing)
         {
-            R_DrawCircle(mx,my,5);
-            //R_DrawLine(omx, omy, mx, my);
+            R_DrawFixed(omx, omy, mx, my);
         }
     }
     else // In toolbar

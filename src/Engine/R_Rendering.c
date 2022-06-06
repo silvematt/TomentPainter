@@ -52,7 +52,7 @@ void R_UpdateColorPicker(void)
     }
 }
 
-void R_DrawLine(int x1, int y1, int x2, int y2)
+void R_DrawFixed(int x1, int y1, int x2, int y2)
 {
     while(x1 != x2 || y1 != y2)
     {
@@ -68,7 +68,11 @@ void R_DrawLine(int x1, int y1, int x2, int y2)
             else if(y1 < y2)
                 y1++;
 
-        pixels[x1 + y1 * width] = currentMainColor;
+        // Draw a simple line if bushSize is 1
+        if(bushSize <= 1)
+            pixels[x1 + y1 * width] = currentMainColor;
+        else // Otherwise keep drawing circles
+            R_DrawCircle(x1, y1, bushSize);
     }
 }
 
@@ -77,7 +81,8 @@ void R_DrawCircle(int x0, int y0, int r)
     for(int y=-r; y<=r; y++)
         for(int x=-r; x<=r; x++)
             if(x*x+y*y <= r*r)
-                pixels[(x0+x) + (y0+y) * width] = currentMainColor;
+                if( x0+x > 0 && x0+x < SCREEN_WIDTH && y0+y > 0 && y0+y < SCREEN_HEIGHT)    // To not go outside of boundaries
+                    pixels[(x0+x) + (y0+y) * width] = currentMainColor;
 }
 
 

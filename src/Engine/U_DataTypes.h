@@ -24,6 +24,7 @@ typedef struct button_s
     char* name;
     SDL_Rect box;
     int (*OnClick)(struct button_s* btn);
+    int data1;
 } button_t;
 
 #endif

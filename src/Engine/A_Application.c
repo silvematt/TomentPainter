@@ -26,7 +26,8 @@ static void A_InitPalette(void)
 {
     currentMainColor = SDL_MapRGBA(window_surface->format, 255, 255, 255, 255);
     paletteBrightness = 256;
-    bushSize = 3;
+    bushSize = 1;
+    printf("Bush Size: 1\n");
 
     paletteButtons[0].name = "BrightnessSelector";
     paletteButtons[0].box.x = 775;
@@ -41,6 +42,21 @@ static void A_InitPalette(void)
     paletteButtons[1].box.w = 128;
     paletteButtons[1].box.h = 64;
     paletteButtons[1].OnClick = G_ColorPickerOnClick;
+
+    paletteButtons[2].name = "SaveButton";
+    paletteButtons[2].box.x = SCREEN_WIDTH + (PALETTE_WIDTH / 2) - 25;
+    paletteButtons[2].box.y = 400;
+    paletteButtons[2].box.w = 50;
+    paletteButtons[2].box.h = 50;
+    paletteButtons[2].OnClick = G_SaveButtonOnClick;
+
+    // Bush Sizes
+    paletteButtons[2].name = "BushSize1";
+    paletteButtons[2].box.x = SCREEN_WIDTH + (PALETTE_WIDTH / 2) - 25;
+    paletteButtons[2].box.y = 400;
+    paletteButtons[2].box.w = 50;
+    paletteButtons[2].box.h = 50;
+    paletteButtons[2].OnClick = G_SaveButtonOnClick;
 }
 
 void A_GameLoop(void)

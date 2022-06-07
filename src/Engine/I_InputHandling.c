@@ -2,6 +2,7 @@
 #include "A_Application.h"
 #include "R_Rendering.h"
 #include "U_Utilities.h"
+#include "G_GUIButtons.h"
 
 void I_HandleInput(void)
 {
@@ -91,6 +92,10 @@ void I_HandleInput(void)
                     case SDLK_0:
                         bushSize = 10;
                         printf("Bush Size: 10\n");
+                    break;
+
+                    case SDLK_e:
+                        G_SaveButtonOnClick(NULL);
                     break;
                 }
             break;

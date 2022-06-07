@@ -1,5 +1,6 @@
 #include "A_Application.h"
 #include "R_Rendering.h"
+#include "U_Utilities.h"
 #include <math.h>
 
 void R_DrawFullColumn(int x, int color)
@@ -23,6 +24,87 @@ void R_DrawPalette()
     
     while(paletteX < SCREEN_WIDTH + PALETTE_WIDTH)
         R_DrawFullColumn(paletteX++, SDL_MapRGBA(window_surface->format, 128, 128, 128, 128));
+
+
+    // Draw the Icons of the Palette buttons    
+    SDL_Rect r1, r2;
+
+    // Save Icon
+    SDL_Surface* floppy = SDL_LoadBMP("Data/floppy.bmp");
+    SDL_Rect_Set(&r1, 0, 0, 50, 50);
+    SDL_Rect_Set(&r2, SCREEN_WIDTH + (PALETTE_WIDTH / 2) - 25, 400, 50, 50);
+    SDL_BlitSurface(floppy, &r1,window_surface, &r2);
+    SDL_FreeSurface(floppy);
+
+    //Bushes sizes 1
+    SDL_Surface* bs1 = SDL_LoadBMP("Data/bs1.bmp");
+    SDL_Rect_Set(&r1, 0, 0, 25, 25);
+    SDL_Rect_Set(&r2, SCREEN_WIDTH + 5, 250, 25, 25);
+    SDL_BlitSurface(bs1, &r1,window_surface, &r2);
+    SDL_FreeSurface(bs1);
+
+    //Bushes sizes 2
+    bs1 = SDL_LoadBMP("Data/bs2.bmp");
+    SDL_Rect_Set(&r1, 0, 0, 25, 25);
+    SDL_Rect_Set(&r2, SCREEN_WIDTH + 35, 250, 25, 25);
+    SDL_BlitSurface(bs1, &r1,window_surface, &r2);
+    SDL_FreeSurface(bs1);
+
+    //Bushes sizes 3
+    bs1 = SDL_LoadBMP("Data/bs3.bmp");
+    SDL_Rect_Set(&r1, 0, 0, 25, 25);
+    SDL_Rect_Set(&r2, SCREEN_WIDTH + 65, 250, 25, 25);
+    SDL_BlitSurface(bs1, &r1,window_surface, &r2);
+    SDL_FreeSurface(bs1);
+
+    //Bushes sizes 4
+    bs1 = SDL_LoadBMP("Data/bs4.bmp");
+    SDL_Rect_Set(&r1, 0, 0, 25, 25);
+    SDL_Rect_Set(&r2, SCREEN_WIDTH + 95, 250, 25, 25);
+    SDL_BlitSurface(bs1, &r1,window_surface, &r2);
+    SDL_FreeSurface(bs1);
+
+    //Bushes sizes 5
+    bs1 = SDL_LoadBMP("Data/bs5.bmp");
+    SDL_Rect_Set(&r1, 0, 0, 25, 25);
+    SDL_Rect_Set(&r2, SCREEN_WIDTH + 125, 250, 25, 25);
+    SDL_BlitSurface(bs1, &r1,window_surface, &r2);
+    SDL_FreeSurface(bs1);
+
+    //Bushes sizes 6
+    bs1 = SDL_LoadBMP("Data/bs6.bmp");
+    SDL_Rect_Set(&r1, 0, 0, 25, 25);
+    SDL_Rect_Set(&r2, SCREEN_WIDTH + 5, 290, 25, 25);
+    SDL_BlitSurface(bs1, &r1,window_surface, &r2);
+    SDL_FreeSurface(bs1);
+
+    //Bushes sizes 7
+    bs1 = SDL_LoadBMP("Data/bs7.bmp");
+    SDL_Rect_Set(&r1, 0, 0, 25, 25);
+    SDL_Rect_Set(&r2, SCREEN_WIDTH + 35, 290, 25, 25);
+    SDL_BlitSurface(bs1, &r1,window_surface, &r2);
+    SDL_FreeSurface(bs1);
+
+    //Bushes sizes 8
+    bs1 = SDL_LoadBMP("Data/bs7.bmp");
+    SDL_Rect_Set(&r1, 0, 0, 25, 25);
+    SDL_Rect_Set(&r2, SCREEN_WIDTH + 65, 290, 25, 25);
+    SDL_BlitSurface(bs1, &r1,window_surface, &r2);
+    SDL_FreeSurface(bs1);
+
+    //Bushes sizes 9
+    bs1 = SDL_LoadBMP("Data/bs8.bmp");
+    SDL_Rect_Set(&r1, 0, 0, 25, 25);
+    SDL_Rect_Set(&r2, SCREEN_WIDTH + 95, 290, 25, 25);
+    SDL_BlitSurface(bs1, &r1,window_surface, &r2);
+    SDL_FreeSurface(bs1);
+
+    //Bushes sizes 10
+    bs1 = SDL_LoadBMP("Data/bs8.bmp");
+    SDL_Rect_Set(&r1, 0, 0, 25, 25);
+    SDL_Rect_Set(&r2, SCREEN_WIDTH + 125, 290, 25, 25);
+    SDL_BlitSurface(bs1, &r1,window_surface, &r2);
+    SDL_FreeSurface(bs1);
 
     R_UpdateColorPicker();
 }
@@ -68,8 +150,10 @@ void R_DrawCurrentColor(void)
 void R_DrawFixed(int x1, int y1, int x2, int y2)
 {
     // Draw a simple line if bushSize is 1
-        if(bushSize <= 1)
+        if(bushSize <= 1) {
+             if( x1 > 0 && x1 < SCREEN_WIDTH && y1 > 0 && y1 < SCREEN_HEIGHT)    // To not go outside of boundaries
             pixels[x1 + y1 * width] = currentMainColor;
+        }
         else // Otherwise keep drawing circles
             R_DrawCircle(x1, y1, bushSize);
             
@@ -88,8 +172,10 @@ void R_DrawFixed(int x1, int y1, int x2, int y2)
                 y1++;
 
         // Draw a simple line if bushSize is 1
-        if(bushSize <= 1)
-            pixels[x1 + y1 * width] = currentMainColor;
+        if(bushSize <= 1) {
+            if( x1 > 0 && x1 < SCREEN_WIDTH && y1 > 0 && y1 < SCREEN_HEIGHT)    // To not go outside of boundaries
+                pixels[x1 + y1 * width] = currentMainColor;
+        }
         else // Otherwise keep drawing circles
             R_DrawCircle(x1, y1, bushSize);
     }

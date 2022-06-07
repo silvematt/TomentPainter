@@ -32,8 +32,11 @@ int paletteBrightness;
 int bushSize;
 int currentMainColor;
 
+SDL_Surface* exportSurface;
+SDL_Rect exportRect;
+
 // Palette Buttons
-#define PALETTE_BUTTONS_COUNT 2
+#define PALETTE_BUTTONS_COUNT 13
 
 // 0 = brighthnessSelector;
 button_t paletteButtons[PALETTE_BUTTONS_COUNT];

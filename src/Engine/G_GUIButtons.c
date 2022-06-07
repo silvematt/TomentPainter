@@ -20,3 +20,19 @@ int G_ColorPickerOnClick(struct button_s* btn)
     R_DrawCurrentColor();
     return 0;
 }
+
+int G_SaveButtonOnClick(struct button_s* btn)
+{
+    exportSurface = SDL_GetWindowSurface(DrawingApp.window);
+    exportSurface->w = 640;
+    exportSurface->h = 480;
+
+    SDL_SaveBMP(exportSurface, "export.bmp");
+    printf("\n Image exported as 'export.bmp'!");
+}
+
+int G_SetBushSize(struct button_s* btn)
+{
+    bushSize = btn->data1;
+    printf("Bush Size: %d\n", btn->data1);
+}

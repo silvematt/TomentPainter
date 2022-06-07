@@ -25,6 +25,9 @@ typedef struct button_s
     SDL_Rect box;
     int (*OnClick)(struct button_s* btn);
     int data1;
+
+    boolean_t render;
+    char* fileName;
 } button_t;
 
 #endif

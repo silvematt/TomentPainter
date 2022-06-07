@@ -11,4 +11,5 @@ void R_DrawFixed(int x1, int y1, int x2, int y2);
 void R_UpdateColorPicker(void);
 void R_DrawCurrentColor(void);
 void R_DrawCircle(int x0, int y0, int r);
+void R_DrawAllButtons(void);
 #endif

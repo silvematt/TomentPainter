@@ -26,87 +26,26 @@ void R_DrawPalette()
         R_DrawFullColumn(paletteX++, SDL_MapRGBA(window_surface->format, 128, 128, 128, 128));
 
 
-    // Draw the Icons of the Palette buttons    
-    SDL_Rect r1, r2;
-
-    // Save Icon
-    SDL_Surface* floppy = SDL_LoadBMP("Data/floppy.bmp");
-    SDL_Rect_Set(&r1, 0, 0, 50, 50);
-    SDL_Rect_Set(&r2, SCREEN_WIDTH + (PALETTE_WIDTH / 2) - 25, 400, 50, 50);
-    SDL_BlitSurface(floppy, &r1,window_surface, &r2);
-    SDL_FreeSurface(floppy);
-
-    //Bushes sizes 1
-    SDL_Surface* bs1 = SDL_LoadBMP("Data/bs1.bmp");
-    SDL_Rect_Set(&r1, 0, 0, 25, 25);
-    SDL_Rect_Set(&r2, SCREEN_WIDTH + 5, 250, 25, 25);
-    SDL_BlitSurface(bs1, &r1,window_surface, &r2);
-    SDL_FreeSurface(bs1);
-
-    //Bushes sizes 2
-    bs1 = SDL_LoadBMP("Data/bs2.bmp");
-    SDL_Rect_Set(&r1, 0, 0, 25, 25);
-    SDL_Rect_Set(&r2, SCREEN_WIDTH + 35, 250, 25, 25);
-    SDL_BlitSurface(bs1, &r1,window_surface, &r2);
-    SDL_FreeSurface(bs1);
-
-    //Bushes sizes 3
-    bs1 = SDL_LoadBMP("Data/bs3.bmp");
-    SDL_Rect_Set(&r1, 0, 0, 25, 25);
-    SDL_Rect_Set(&r2, SCREEN_WIDTH + 65, 250, 25, 25);
-    SDL_BlitSurface(bs1, &r1,window_surface, &r2);
-    SDL_FreeSurface(bs1);
-
-    //Bushes sizes 4
-    bs1 = SDL_LoadBMP("Data/bs4.bmp");
-    SDL_Rect_Set(&r1, 0, 0, 25, 25);
-    SDL_Rect_Set(&r2, SCREEN_WIDTH + 95, 250, 25, 25);
-    SDL_BlitSurface(bs1, &r1,window_surface, &r2);
-    SDL_FreeSurface(bs1);
-
-    //Bushes sizes 5
-    bs1 = SDL_LoadBMP("Data/bs5.bmp");
-    SDL_Rect_Set(&r1, 0, 0, 25, 25);
-    SDL_Rect_Set(&r2, SCREEN_WIDTH + 125, 250, 25, 25);
-    SDL_BlitSurface(bs1, &r1,window_surface, &r2);
-    SDL_FreeSurface(bs1);
-
-    //Bushes sizes 6
-    bs1 = SDL_LoadBMP("Data/bs6.bmp");
-    SDL_Rect_Set(&r1, 0, 0, 25, 25);
-    SDL_Rect_Set(&r2, SCREEN_WIDTH + 5, 290, 25, 25);
-    SDL_BlitSurface(bs1, &r1,window_surface, &r2);
-    SDL_FreeSurface(bs1);
-
-    //Bushes sizes 7
-    bs1 = SDL_LoadBMP("Data/bs7.bmp");
-    SDL_Rect_Set(&r1, 0, 0, 25, 25);
-    SDL_Rect_Set(&r2, SCREEN_WIDTH + 35, 290, 25, 25);
-    SDL_BlitSurface(bs1, &r1,window_surface, &r2);
-    SDL_FreeSurface(bs1);
-
-    //Bushes sizes 8
-    bs1 = SDL_LoadBMP("Data/bs7.bmp");
-    SDL_Rect_Set(&r1, 0, 0, 25, 25);
-    SDL_Rect_Set(&r2, SCREEN_WIDTH + 65, 290, 25, 25);
-    SDL_BlitSurface(bs1, &r1,window_surface, &r2);
-    SDL_FreeSurface(bs1);
-
-    //Bushes sizes 9
-    bs1 = SDL_LoadBMP("Data/bs8.bmp");
-    SDL_Rect_Set(&r1, 0, 0, 25, 25);
-    SDL_Rect_Set(&r2, SCREEN_WIDTH + 95, 290, 25, 25);
-    SDL_BlitSurface(bs1, &r1,window_surface, &r2);
-    SDL_FreeSurface(bs1);
-
-    //Bushes sizes 10
-    bs1 = SDL_LoadBMP("Data/bs8.bmp");
-    SDL_Rect_Set(&r1, 0, 0, 25, 25);
-    SDL_Rect_Set(&r2, SCREEN_WIDTH + 125, 290, 25, 25);
-    SDL_BlitSurface(bs1, &r1,window_surface, &r2);
-    SDL_FreeSurface(bs1);
+    R_DrawAllButtons();
 
     R_UpdateColorPicker();
+}
+
+void R_DrawAllButtons()
+{
+    SDL_Surface* surface;
+    SDL_Rect r1,r2;
+    for(int i = 0; i < PALETTE_BUTTONS_COUNT; i++)
+    {
+        if(paletteButtons[i].render == true)
+        {
+            surface = SDL_LoadBMP(paletteButtons[i].fileName);
+            SDL_Rect_Set(&r1, 0, 0, 50, 50);
+            SDL_Rect_Set(&r2, paletteButtons[i].box.x, paletteButtons[i].box.y, paletteButtons[i].box.w, paletteButtons[i].box.h);
+            SDL_BlitSurface(surface, &r1,window_surface, &r2);
+            SDL_FreeSurface(surface);
+        }
+    }
 }
 
 void R_UpdateColorPicker(void)

@@ -28,7 +28,7 @@ int G_SaveButtonOnClick(struct button_s* btn)
     exportSurface->h = 480;
 
     SDL_SaveBMP(exportSurface, "export.bmp");
-    printf("\n Image exported as 'export.bmp'!");
+    printf("\n Image exported as 'export.bmp'!\n");
 }
 
 int G_SetBushSize(struct button_s* btn)

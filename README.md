@@ -1,4 +1,4 @@
-# TomentPainter
+# Toment Painter
 
 ![alt text](https://i.imgur.com/KTopiRa.png)
 
@@ -21,4 +21,5 @@ There were so many features I would have liked to add, but for the time I gave m
 
 I'm not sure it is the best way to do it, but the way it works is at the start of the program I grab the whole Window Surface and store it into an SDL_Surface, I also have a pointer to the pixels of the surface, so that I can do stuff on them, and then I SDL_UpdateWindowSurface at the end of every tick.
 
-Does what I asked lol!
+
+It does what I asked lol!

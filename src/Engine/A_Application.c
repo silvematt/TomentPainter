@@ -3,6 +3,10 @@
 #include "R_Rendering.h"
 #include "G_GUIButtons.h"
 
+
+// --------------------------------------------
+// Initializes the program
+// --------------------------------------------
 void A_InitTomentPainter(void)
 {
     DrawingApp.quit = false;
@@ -26,8 +30,13 @@ void A_InitTomentPainter(void)
     A_InitPalette();
 }
 
+
+// --------------------------------------------
+// Initializes the palette
+// --------------------------------------------
 static void A_InitPalette(void)
 {
+    // Set defaults
     currentMainColor = SDL_MapRGBA(window_surface->format, 255, 255, 255, 255);
     currentAltColor = SDL_MapRGBA(window_surface->format, 0,0,0, 255);
 
@@ -35,6 +44,8 @@ static void A_InitPalette(void)
     bushSize = 1;
     printf("Bush Size: 1\n");
 
+
+    // Create and configure buttons
     paletteButtons[0].name = "BrightnessSelector";
     paletteButtons[0].box.x = 775;
     paletteButtons[0].box.y = 10;
@@ -182,18 +193,24 @@ static void A_InitPalette(void)
 
 }
 
+
+// --------------------------------------------
+// Update
+// --------------------------------------------
 void A_GameLoop(void)
 {
     // In canvas
     if(mx <= SCREEN_WIDTH) 
     {
+        mouseOnPalette = false;
+
         if(drawing || altdrawing)
         {
-            R_DrawFixed(omx, omy, mx, my);
+            R_Paint(omx, omy, mx, my);
         }
     }
     else // In toolbar
     {
-        //printf("TOOLBAR ");
+        mouseOnPalette = true;
     }
 }

@@ -16,6 +16,7 @@ int G_BrightnessButtonOnClick(struct button_s* btn)
 
 int G_ColorPickerOnClick(struct button_s* btn)
 {
+    // Read and store the pixel selected by the mouse
     currentMainColor = pixels[mx + my * width];
     R_DrawCurrentColor();
     return 0;
@@ -23,10 +24,12 @@ int G_ColorPickerOnClick(struct button_s* btn)
 
 int G_SaveButtonOnClick(struct button_s* btn)
 {
+    // Save on surface and resize
     exportSurface = SDL_GetWindowSurface(DrawingApp.window);
     exportSurface->w = 640;
     exportSurface->h = 480;
 
+    // Save as bmp
     SDL_SaveBMP(exportSurface, "export.bmp");
     printf("\n Image exported as 'export.bmp'!\n");
 }

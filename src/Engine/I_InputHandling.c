@@ -4,6 +4,10 @@
 #include "U_Utilities.h"
 #include "G_GUIButtons.h"
 
+
+// -------------------------------
+// Handles SDL Events and input
+// -------------------------------
 void I_HandleInput(void)
 {
 	SDL_Event event;
@@ -19,15 +23,17 @@ void I_HandleInput(void)
 
             // Get Mouse Pos
             case SDL_MOUSEBUTTONDOWN:
-
+                
                 if(event.button.button == SDL_BUTTON_LEFT)
                     drawing = true;
                 else
                     altdrawing = true;
 
-                    SDL_GetMouseState(&mx,&my);
+                    // Get latest mouse
                     omx = mx;
                     omy = my;
+
+                    SDL_GetMouseState(&mx,&my);
             break;
 
             case SDL_MOUSEBUTTONUP:
@@ -104,6 +110,7 @@ void I_HandleInput(void)
 				break;
 		}
 
+        // Handle 
         I_HandleGUI(event);
 	}
 
@@ -114,6 +121,7 @@ void I_HandleInput(void)
     // Get new pos and clamp values
     SDL_GetMouseState(&mx,&my);
 
+    // Clamp coordinates to screen
     mx = CLAMP(mx, 0, SCREEN_WIDTH + PALETTE_WIDTH);
     my = CLAMP(my, 0, SCREEN_HEIGHT-1);
 
@@ -122,14 +130,22 @@ void I_HandleInput(void)
 
 }
 
+// -------------------------------
+// Callbacks for GUIButtons
+// -------------------------------
 void I_HandleGUI(SDL_Event event)
 {
+    if(mouseOnPalette == false)
+        return;
+
     // Offset mouse pos
     static int x = 0;
     static int y = 0;
 
+    // For each buttons
     for(int i = 0; i < PALETTE_BUTTONS_COUNT; i++)
     {
+        // If there's a click
         if( event.type == SDL_MOUSEBUTTONDOWN )
         {
             //If the left mouse button was pressed

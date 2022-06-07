@@ -3,12 +3,18 @@
 #include "U_Utilities.h"
 #include <math.h>
 
+// ----------------------------------------------------
+// Given an X pixel, draw the whole column
+// ----------------------------------------------------
 void R_DrawFullColumn(int x, int color)
 {
     for(int y = 0; y < SCREEN_HEIGHT; y++)
         pixels[x + y * width] = color;
 }
 
+// ----------------------------------------------------
+// Clear the screen
+// ----------------------------------------------------
 void R_ClearCanvas(void)
 {
     for(int y = 0; y < SCREEN_HEIGHT; y++)
@@ -16,6 +22,10 @@ void R_ClearCanvas(void)
         pixels[x + y * width] = SDL_MapRGBA(window_surface->format, 0, 0, 0, 0);
 }
 
+
+// ----------------------------------------------------
+// Draws the Palette
+// ----------------------------------------------------
 void R_DrawPalette()
 {
     // Draw line and background
@@ -31,6 +41,9 @@ void R_DrawPalette()
     R_UpdateColorPicker();
 }
 
+// ----------------------------------------------------
+// Draws all the Palette Buttons
+// ----------------------------------------------------
 void R_DrawAllButtons()
 {
     SDL_Surface* surface;
@@ -48,6 +61,10 @@ void R_DrawAllButtons()
     }
 }
 
+
+// ----------------------------------------------------
+// Updates the Color Picker when brightness changes.
+// ----------------------------------------------------
 void R_UpdateColorPicker(void)
 {
     // Draw RGB scheme
@@ -75,6 +92,9 @@ void R_UpdateColorPicker(void)
     R_DrawCurrentColor();
 }
 
+// ----------------------------------------------------
+// Updates the Current Color when changes.
+// ----------------------------------------------------
 void R_DrawCurrentColor(void)
 {
     // Draw current color
@@ -86,7 +106,10 @@ void R_DrawCurrentColor(void)
             pixels[(x+startingPixelXOffset) + (y + startingPixelYOffset) * width] = currentMainColor;
 }
 
-void R_DrawFixed(int x1, int y1, int x2, int y2)
+// ----------------------------------------------------
+// Paint
+// ----------------------------------------------------
+void R_Paint(int x1, int y1, int x2, int y2)
 {
     // Draw a simple line if bushSize is 1
         if(bushSize <= 1) {
@@ -96,6 +119,7 @@ void R_DrawFixed(int x1, int y1, int x2, int y2)
         else // Otherwise keep drawing circles
             R_DrawCircle(x1, y1, bushSize);
             
+    // Creates the path from Old Mouse coords and current
     while(x1 != x2 || y1 != y2)
     {
         if(x1 != x2)
@@ -130,6 +154,9 @@ void R_DrawCircle(int x0, int y0, int r)
 }
 
 
+// ----------------------------------------------------
+// Converts from HSV to RGB
+// ----------------------------------------------------
 ColorRGB_t HSVtoRGB(ColorHSV_t colorHSV)
 {
     float r, g, b, h, s, v; //this function works with floats between 0 and 1

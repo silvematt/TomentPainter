@@ -9,40 +9,53 @@
 #define PALETTE_WIDTH 158
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
-
+ 
 typedef struct app_s
 {
     SDL_Window* window;
     boolean_t quit;
 } app_t;
 
-SDL_Surface* window_surface;
-unsigned int * pixels;
-int width;
 app_t DrawingApp;
 
-boolean_t drawing;
-boolean_t altdrawing;
-int mx,my; // mouse x,y
-int omx, omy; // old mouse x,y
-int paletteBrightness;
+SDL_Surface* window_surface;    // Surface of the Window
+unsigned int * pixels;          // Pixels of the surface
+int width;                      // Surface width
 
-int bushSize;
-int currentMainColor;
-int currentAltColor;
+boolean_t drawing;              // Are we drawing with the left mouse button?
+boolean_t altdrawing;           // Are we drawing with the right mouse button?
+int mx,my;                      // Mouse X and Y
+int omx, omy;                   // Old MouseX and Old MouseY (pos at previous update)
+boolean_t mouseOnPalette;       // True if the mouse is on the palette and not the canvas
 
-SDL_Surface* exportSurface;
+int paletteBrightness;          // The brightness of the color picker
+int bushSize;                   // Size of the brush
+int currentMainColor;           // The selected color for LMB
+int currentAltColor;            // Color for RMB (eraser)
+
+SDL_Surface* exportSurface;     // Surface to for exporting only the canvas
 SDL_Rect exportRect;
 
 // Palette Buttons
 #define PALETTE_BUTTONS_COUNT 14
 
-// 0 = brighthnessSelector;
+// All the buttons
 button_t paletteButtons[PALETTE_BUTTONS_COUNT];
 
 
+// -------------------------------
+// Initializes the program
+// -------------------------------
 void A_InitTomentPainter(void);
+
+// -------------------------------
+// Initializes the palette (right toolbar)
+// -------------------------------
 static void A_InitPalette(void);
+
+// -------------------------------
+// Update
+// -------------------------------
 void A_GameLoop(void);
 
 #endif

@@ -1,2 +1,2 @@
 add:
-gcc -Isrc/include -Lsrc/lib -o bin/TomentPainter src/main.c src/Engine/R_Rendering.c src/Engine/A_Application.c src/Engine/I_InputHandling.c src/Engine/G_GUIButtons.c src/Engine/U_Utilities.c -lmingw32 -lSDL2main -lSDL2
+gcc -Isrc/include -Lsrc/lib -o bin/TomentPainter src/Engine/A_Application.c src/main.c src/Engine/R_Rendering.c src/Engine/I_InputHandling.c src/Engine/G_GUIButtons.c src/Engine/U_Utilities.c -lmingw32 -lSDL2main -lSDL2

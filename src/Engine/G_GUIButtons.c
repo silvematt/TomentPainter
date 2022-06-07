@@ -1,7 +1,7 @@
 #include <stdio.h>
+#include "A_Application.h"
 #include "U_DataTypes.h"
 #include "G_GUIButtons.h"
-#include "A_Application.h"
 #include "R_Rendering.h"
 
 int G_BrightnessButtonOnClick(struct button_s* btn)
@@ -32,15 +32,18 @@ int G_SaveButtonOnClick(struct button_s* btn)
     // Save as bmp
     SDL_SaveBMP(exportSurface, "export.bmp");
     printf("\n Image exported as 'export.bmp'!\n");
+    return 0;
 }
 
 int G_SetBushSize(struct button_s* btn)
 {
     bushSize = btn->data1;
     printf("Bush Size: %d\n", btn->data1);
+    return bushSize;
 }
 
 int G_ClearScreen(struct button_s* btn)
 {
     R_ClearCanvas();
+    return 0;
 }

@@ -3,6 +3,27 @@
 #include "R_Rendering.h"
 #include "G_GUIButtons.h"
 
+// --------------------------------------------
+// Definition of Globals
+// --------------------------------------------
+app_t DrawingApp;
+
+SDL_Surface* window_surface;    // Surface of the Window
+unsigned int * pixels;          // Pixels of the surface
+int width;                      // Surface width
+boolean_t drawing;              // Are we drawing with the left mouse button?
+boolean_t altdrawing;           // Are we drawing with the right mouse button?
+int mx,my;                      // Mouse X and Y
+int omx, omy;                   // Old MouseX and Old MouseY (pos at previous update)
+boolean_t mouseOnPalette;       // True if the mouse is on the palette and not the canvas
+int paletteBrightness;          // The brightness of the color picker
+int bushSize;                   // Size of the brush
+int currentMainColor;           // The selected color for LMB
+int currentAltColor;            // Color for RMB (eraser)
+
+SDL_Surface* exportSurface;     // Surface to for exporting only the canvas
+
+button_t paletteButtons[PALETTE_BUTTONS_COUNT];
 
 // --------------------------------------------
 // Initializes the program

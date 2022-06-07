@@ -16,31 +16,31 @@ typedef struct app_s
     boolean_t quit;
 } app_t;
 
-app_t DrawingApp;
+extern app_t DrawingApp;
 
-SDL_Surface* window_surface;    // Surface of the Window
-unsigned int * pixels;          // Pixels of the surface
-int width;                      // Surface width
+extern SDL_Surface* window_surface;    // Surface of the Window
+extern unsigned int * pixels;          // Pixels of the surface
+extern int width;                      // Surface width
 
-boolean_t drawing;              // Are we drawing with the left mouse button?
-boolean_t altdrawing;           // Are we drawing with the right mouse button?
-int mx,my;                      // Mouse X and Y
-int omx, omy;                   // Old MouseX and Old MouseY (pos at previous update)
-boolean_t mouseOnPalette;       // True if the mouse is on the palette and not the canvas
+extern boolean_t drawing;              // Are we drawing with the left mouse button?
+extern boolean_t altdrawing;           // Are we drawing with the right mouse button?
+extern int mx,my;                      // Mouse X and Y
+extern int omx, omy;                   // Old MouseX and Old MouseY (pos at previous update)
+extern boolean_t mouseOnPalette;       // True if the mouse is on the palette and not the canvas
 
-int paletteBrightness;          // The brightness of the color picker
-int bushSize;                   // Size of the brush
-int currentMainColor;           // The selected color for LMB
-int currentAltColor;            // Color for RMB (eraser)
+extern int paletteBrightness;          // The brightness of the color picker
+extern int bushSize;                   // Size of the brush
+extern int currentMainColor;           // The selected color for LMB
+extern int currentAltColor;            // Color for RMB (eraser)
 
-SDL_Surface* exportSurface;     // Surface to for exporting only the canvas
-SDL_Rect exportRect;
+extern SDL_Surface* exportSurface;     // Surface to for exporting only the canvas
+extern SDL_Rect exportRect;
 
 // Palette Buttons
 #define PALETTE_BUTTONS_COUNT 14
 
 // All the buttons
-button_t paletteButtons[PALETTE_BUTTONS_COUNT];
+extern button_t paletteButtons[PALETTE_BUTTONS_COUNT];
 
 
 // -------------------------------

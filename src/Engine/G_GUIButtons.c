@@ -36,3 +36,8 @@ int G_SetBushSize(struct button_s* btn)
     bushSize = btn->data1;
     printf("Bush Size: %d\n", btn->data1);
 }
+
+int G_ClearScreen(struct button_s* btn)
+{
+    R_ClearCanvas();
+}

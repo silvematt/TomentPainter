@@ -19,12 +19,18 @@ void A_InitTomentPainter(void)
     pixels = window_surface->pixels;
     width = window_surface->w;
 
+    for(int y = 0; y < 480; y++)
+        for(int x = 0; x < 680; x++)
+            pixels[x + y * width] = SDL_MapRGBA(window_surface->format, 0,0,0, 255);
+
     A_InitPalette();
 }
 
 static void A_InitPalette(void)
 {
     currentMainColor = SDL_MapRGBA(window_surface->format, 255, 255, 255, 255);
+    currentAltColor = SDL_MapRGBA(window_surface->format, 0,0,0, 255);
+
     paletteBrightness = 256;
     bushSize = 1;
     printf("Bush Size: 1\n");
@@ -163,6 +169,16 @@ static void A_InitPalette(void)
     paletteButtons[12].data1 = 10;
     paletteButtons[12].render = true;
     paletteButtons[12].fileName = "Data/bs8.bmp";
+
+    // Clear Screen
+    paletteButtons[13].name = "Cls";
+    paletteButtons[13].box.x = SCREEN_WIDTH + 52;
+    paletteButtons[13].box.y = 190;
+    paletteButtons[13].box.w = 50;
+    paletteButtons[13].box.h = 25;
+    paletteButtons[13].OnClick = G_ClearScreen;
+    paletteButtons[13].render = true;
+    paletteButtons[13].fileName = "Data/cls.bmp";
 
 }
 

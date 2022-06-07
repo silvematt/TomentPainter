@@ -21,8 +21,6 @@ unsigned int * pixels;
 int width;
 app_t DrawingApp;
 
-int currentColor;
-
 boolean_t drawing;
 boolean_t altdrawing;
 int mx,my; // mouse x,y
@@ -31,12 +29,13 @@ int paletteBrightness;
 
 int bushSize;
 int currentMainColor;
+int currentAltColor;
 
 SDL_Surface* exportSurface;
 SDL_Rect exportRect;
 
 // Palette Buttons
-#define PALETTE_BUTTONS_COUNT 13
+#define PALETTE_BUTTONS_COUNT 14
 
 // 0 = brighthnessSelector;
 button_t paletteButtons[PALETTE_BUTTONS_COUNT];

@@ -91,7 +91,7 @@ void R_DrawFixed(int x1, int y1, int x2, int y2)
     // Draw a simple line if bushSize is 1
         if(bushSize <= 1) {
              if( x1 > 0 && x1 < SCREEN_WIDTH && y1 > 0 && y1 < SCREEN_HEIGHT)    // To not go outside of boundaries
-            pixels[x1 + y1 * width] = currentMainColor;
+            pixels[x1 + y1 * width] = drawing ? currentMainColor : currentAltColor;
         }
         else // Otherwise keep drawing circles
             R_DrawCircle(x1, y1, bushSize);
@@ -113,7 +113,7 @@ void R_DrawFixed(int x1, int y1, int x2, int y2)
         // Draw a simple line if bushSize is 1
         if(bushSize <= 1) {
             if( x1 > 0 && x1 < SCREEN_WIDTH && y1 > 0 && y1 < SCREEN_HEIGHT)    // To not go outside of boundaries
-                pixels[x1 + y1 * width] = currentMainColor;
+                pixels[x1 + y1 * width] = drawing ? currentMainColor : currentAltColor;
         }
         else // Otherwise keep drawing circles
             R_DrawCircle(x1, y1, bushSize);
@@ -126,7 +126,7 @@ void R_DrawCircle(int x0, int y0, int r)
         for(int x=-r; x<=r; x++)
             if(x*x+y*y <= r*r)
                 if( x0+x > 0 && x0+x < SCREEN_WIDTH && y0+y > 0 && y0+y < SCREEN_HEIGHT)    // To not go outside of boundaries
-                    pixels[(x0+x) + (y0+y) * width] = currentMainColor;
+                    pixels[(x0+x) + (y0+y) * width] = drawing ? currentMainColor : currentAltColor;
 }
 
 

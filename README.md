@@ -16,7 +16,7 @@ Features:
 - CLS (Clear Screen)
 - Export the image (640x480) to a .bmp
 
-There were so many features I would have liked to add, but for the time I gave myself on it I'm pretty ok with the result.
+There were so many features I would have liked to add, but for the time I gave myself on it I'm pretty ok with the result. I've also deliberaterly choosen to not include any other library other than SDL.
 
 
 I'm not sure it is the best way to do it, but the way it works is at the start of the program I grab the whole Window Surface and store it into an SDL_Surface, I also have a pointer to the pixels of the surface, so that I can do stuff on them, and then I SDL_UpdateWindowSurface at the end of every tick.

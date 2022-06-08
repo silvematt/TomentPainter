@@ -113,7 +113,7 @@ void R_Paint(int x1, int y1, int x2, int y2)
 {
     // Draw a simple line if bushSize is 1
         if(bushSize <= 1) {
-             if( x1 > 0 && x1 < SCREEN_WIDTH && y1 > 0 && y1 < SCREEN_HEIGHT)    // To not go outside of boundaries
+             if( x1 >= 0 && x1 < SCREEN_WIDTH && y1 >= 0 && y1 < SCREEN_HEIGHT)    // To not go outside of boundaries
             pixels[x1 + y1 * width] = drawing ? currentMainColor : currentAltColor;
         }
         else // Otherwise keep drawing circles
@@ -136,7 +136,7 @@ void R_Paint(int x1, int y1, int x2, int y2)
 
         // Draw a simple line if bushSize is 1
         if(bushSize <= 1) {
-            if( x1 > 0 && x1 < SCREEN_WIDTH && y1 > 0 && y1 < SCREEN_HEIGHT)    // To not go outside of boundaries
+            if( x1 >= 0 && x1 < SCREEN_WIDTH && y1 >= 0 && y1 < SCREEN_HEIGHT)    // To not go outside of boundaries
                 pixels[x1 + y1 * width] = drawing ? currentMainColor : currentAltColor;
         }
         else // Otherwise keep drawing circles
@@ -144,15 +144,97 @@ void R_Paint(int x1, int y1, int x2, int y2)
     }
 }
 
+// ----------------------------------------------------
+// Used to draw at 2+px bush size.
+// ----------------------------------------------------
 void R_DrawCircle(int x0, int y0, int r)
 {
     for(int y=-r; y<=r; y++)
         for(int x=-r; x<=r; x++)
             if(x*x+y*y <= r*r)
-                if( x0+x > 0 && x0+x < SCREEN_WIDTH && y0+y > 0 && y0+y < SCREEN_HEIGHT)    // To not go outside of boundaries
+                if( x0+x >= 0 && x0+x < SCREEN_WIDTH && y0+y >= 0 && y0+y < SCREEN_HEIGHT)    // To not go outside of boundaries
                     pixels[(x0+x) + (y0+y) * width] = drawing ? currentMainColor : currentAltColor;
 }
 
+// ----------------------------------------------------
+// Line Flood Fill, for the bucket tool
+// ----------------------------------------------------
+void R_LineFloodFill(int x, int y, int color, int ogColor)
+{
+    if(color == ogColor)
+        return;
+
+    printf("Flood filling... \n");
+    
+    transform2d_t stack[100];
+    transform2d_t curElement;
+    int stackTop = -1;
+
+    boolean_t mRight; // 
+    boolean_t alreadyCheckedAbove, alreadyCheckedBelow;
+
+    // Push the first element
+    FF_StackPush(stack, x, y, &stackTop);
+    while(stackTop >= 0)    // While there are elements
+    {
+        // Take the first one
+        curElement = FF_StackPop(stack, &stackTop);
+
+        mRight = false;
+        int leftestX = curElement.x;
+
+        // Find leftest
+        while(leftestX >= 0 && pixels[leftestX + curElement.y * width] == ogColor) 
+            leftestX--;
+        leftestX++;
+
+        alreadyCheckedAbove = false;
+        alreadyCheckedBelow = false;
+
+        // While this line has not finsihed to be drawn
+        while(mRight == false)
+        {
+            // Fill right
+            if(leftestX < SCREEN_WIDTH && pixels[leftestX + curElement.y * width] == ogColor) 
+            {
+                pixels[leftestX + curElement.y * width] = color;
+
+                // Check above this pixel
+                if (alreadyCheckedBelow == false && (curElement.y-1) >= 0 && (curElement.y-1) < SCREEN_HEIGHT &&
+                    pixels[leftestX + ((curElement.y-1) * width)] == ogColor)
+                    {
+                        // If we never checked it, add it to the stack
+                        FF_StackPush(stack, leftestX, curElement.y-1, &stackTop);
+                        alreadyCheckedBelow = true;
+                    }
+                else if(alreadyCheckedBelow == true && (curElement.y-1) > 0 && pixels[leftestX + (curElement.y-1) * width] != ogColor)
+                {
+                    // Skip now, but check next time
+                    alreadyCheckedBelow = false;
+                }
+                
+                // Check below this pixel
+                if (alreadyCheckedAbove == false && (curElement.y+1) >= 0 && (curElement.y+1) < SCREEN_HEIGHT &&
+                    pixels[leftestX + ((curElement.y+1) * width)] == ogColor) 
+                    {
+                        // If we never checked it, add it to the stack
+                        FF_StackPush(stack, leftestX, curElement.y+1, &stackTop);
+                        alreadyCheckedAbove = true;
+                    }
+                else if (alreadyCheckedAbove == true && (curElement.y+1) < SCREEN_WIDTH && pixels[leftestX + (curElement.y+1) * width] != ogColor)
+                {
+                    // Skip now, but check next time
+                    alreadyCheckedAbove = false;
+                }
+
+                // Keep going on the right
+                leftestX++;
+            }
+            else // Done
+                mRight = true;
+        }
+    }
+}
 
 // ----------------------------------------------------
 // Converts from HSV to RGB

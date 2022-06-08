@@ -43,6 +43,15 @@ void R_DrawCircle(int x0, int y0, int r);
 // ----------------------------------------------------
 void R_DrawAllButtons(void);
 
+// ----------------------------------------------------
+// Flood Fill Stack
+// ----------------------------------------------------
+void R_FloodFillStack(int x, int y, int color, int ogColor);
+
+// ----------------------------------------------------
+// Line Flood Fill, for the bucket tool
+// ----------------------------------------------------
+void R_LineFloodFill(int x, int y, int color, int ogColor);
 
 // ----------------------------------------------------
 // Converts from HSV to RGB

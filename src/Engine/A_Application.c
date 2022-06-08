@@ -13,6 +13,7 @@ unsigned int * pixels;          // Pixels of the surface
 int width;                      // Surface width
 boolean_t drawing;              // Are we drawing with the left mouse button?
 boolean_t altdrawing;           // Are we drawing with the right mouse button?
+boolean_t floodFillCalled;      // True if user is trying to floodfill
 int mx,my;                      // Mouse X and Y
 int omx, omy;                   // Old MouseX and Old MouseY (pos at previous update)
 boolean_t mouseOnPalette;       // True if the mouse is on the palette and not the canvas
@@ -46,7 +47,7 @@ void A_InitTomentPainter(void)
 
     for(int y = 0; y < 480; y++)
         for(int x = 0; x < 680; x++)
-            pixels[x + y * width] = SDL_MapRGBA(window_surface->format, 0,0,0, 255);
+            pixels[x + y * width] = SDL_MapRGBA(window_surface->format, 0,0,0,0);
 
     A_InitPalette();
 }
@@ -228,6 +229,11 @@ void A_GameLoop(void)
         if(drawing || altdrawing)
         {
             R_Paint(omx, omy, mx, my);
+        }
+        if(floodFillCalled == true)
+        {
+            floodFillCalled = false;
+            R_LineFloodFill(omx, omy, currentMainColor, pixels[mx + my * width]);
         }
     }
     else // In toolbar

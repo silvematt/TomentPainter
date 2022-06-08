@@ -103,6 +103,10 @@ void I_HandleInput(void)
                     case SDLK_e:
                         G_SaveButtonOnClick(NULL);
                     break;
+
+                    case SDLK_f:
+                        floodFillCalled = true;
+                    break;
                 }
             break;
 

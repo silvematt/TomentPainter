@@ -24,6 +24,7 @@ extern int width;                      // Surface width
 
 extern boolean_t drawing;              // Are we drawing with the left mouse button?
 extern boolean_t altdrawing;           // Are we drawing with the right mouse button?
+extern boolean_t floodFillCalled;      // True if user is trying to flood fiil
 extern int mx,my;                      // Mouse X and Y
 extern int omx, omy;                   // Old MouseX and Old MouseY (pos at previous update)
 extern boolean_t mouseOnPalette;       // True if the mouse is on the palette and not the canvas
@@ -35,6 +36,9 @@ extern int currentAltColor;            // Color for RMB (eraser)
 
 extern SDL_Surface* exportSurface;     // Surface to for exporting only the canvas
 extern SDL_Rect exportRect;
+
+//  Flood Fill stack
+#define FLOOD_FILL_STACK_SIZE SCREEN_WIDTH*SCREEN_HEIGHT
 
 // Palette Buttons
 #define PALETTE_BUTTONS_COUNT 14

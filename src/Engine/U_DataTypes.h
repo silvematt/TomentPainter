@@ -34,4 +34,11 @@ typedef struct button_s
     char* fileName;
 } button_t;
 
+// Represents a pixel
+typedef struct transform2d_x
+{
+    int x,y;
+} transform2d_t;
+
+
 #endif

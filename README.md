@@ -12,6 +12,7 @@ I've written this painter over a weekend to get started with Computer Graphics :
 Features:
 - Draw at different bushes sizes (1px to 10px)
 - Color Picker
+- Bucket Tool (Flood Fill) - Press F to flood fill an area (and to pay respect!).
 - Eraser
 - CLS (Clear Screen)
 - Export the image (640x480) to a .bmp

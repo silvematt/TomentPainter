@@ -51,7 +51,7 @@ void A_InitTomentPainter(void);
 // -------------------------------
 // Initializes the palette (right toolbar)
 // -------------------------------
-static void A_InitPalette(void);
+void A_InitPalette(void);
 
 // -------------------------------
 // Update

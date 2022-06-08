@@ -55,7 +55,7 @@ void A_InitTomentPainter(void)
 // --------------------------------------------
 // Initializes the palette
 // --------------------------------------------
-static void A_InitPalette(void)
+void A_InitPalette(void)
 {
     // Set defaults
     currentMainColor = SDL_MapRGBA(window_surface->format, 255, 255, 255, 255);
